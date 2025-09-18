@@ -26,7 +26,7 @@ public class MyArrayListwithGenerics<T> {
 
     public void add(T value){
 
-    //Check if array size is equal to the size of array lenght then call resize
+    //Check if array size is equal to the size of array length then call resize
         if(size==arr.length){
            resize();
             System.out.println("Size is equal "+size+"to arr length"+arr.length );
