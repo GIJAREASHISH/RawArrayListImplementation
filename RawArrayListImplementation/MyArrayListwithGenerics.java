@@ -2,9 +2,9 @@ package RawArrayListImplementation;
 
 public class MyArrayListwithGenerics<T> {
 
-     int size;
-     int capacity;
-     T[] arr;
+     private int size;
+     private int capacity;
+     private T[] arr;
 
 
     MyArrayListwithGenerics(T[] arr1){
