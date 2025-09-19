@@ -37,6 +37,37 @@ public class MyArrayListwithGenerics<T> {
 
     }
 
+
+
+
+    //Return
+    public T get(int index){
+
+        for(int i=0;i<arr.length;i++){
+
+            if(i==index){
+
+                return arr[i];
+            }
+        }
+
+        return null;
+    }
+
+    //Return Index
+    public int getIndex(T value) throws Error{
+
+        for(int i=0;i<arr.length;i++){
+
+            if(arr[i].equals(value)){
+
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     public void resize(){
 
         int newcapacity =arr.length*2;
@@ -66,14 +97,29 @@ public class MyArrayListwithGenerics<T> {
 
         Integer[] arr=new Integer[2];
 
-        MyArrayListwithGenerics<Integer> list= new MyArrayListwithGenerics<>(arr);
-        list.add(6);
-        list.add(14);
-        list.add(2);
+//        MyArrayListwithGenerics<Integer> list= new MyArrayListwithGenerics<>(arr);
+//        list.add(6);
+//        list.add(14);
+//        list.add(2);
+        //System.out.println(list);
+        //System.out.println(list.getIndex(2));
 
 
-        System.out.println(list);
+        //String Example
+        String[] arr2=new String[2];
+        MyArrayListwithGenerics<String> list1= new MyArrayListwithGenerics<String>(arr2);
+        list1.add("Ashish");
+        list1.add("Gijare");
+        list1.add("QA");
 
+        try{
+       System.out.println(list1.getIndex("SS"));
+        }
+        catch(Exception e){
+            System.out.println("Not Found");
+
+
+        }
 
     }
 
