@@ -118,6 +118,7 @@ public class MyHashMapclosetoActual<K,V> {
 //                    entry.value=null;
 //                    entry.key=null;
 //                }
+
 //            }
 
             Iterator<Entry<K,V>> iterator= table[index].iterator();
