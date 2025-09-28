@@ -12,7 +12,7 @@ public class MyHashMapclosetoActual<K,V> {
     float loadFactor = 0.75f;
     //Array of buckets, Used linkedlist to overcome collision
     LinkedList<Entry<K,V>>[] table;
-    LinkedList<Entry<K,V>>[] newtable;
+
 
     //Constructor fixed size linked list initially
     MyHashMapclosetoActual(){
@@ -26,7 +26,6 @@ public class MyHashMapclosetoActual<K,V> {
 
     class Entry<K,V>{
 
-        public MyHashMap.Entry[] table;
         K key;
         V value;
 
@@ -44,10 +43,10 @@ public class MyHashMapclosetoActual<K,V> {
 
     public void put(K key, V value){
 
-        int index =key.hashCode()%table.length;
+        int index =Math.abs(key.hashCode())%table.length;
 
         if(size==table.length*loadFactor){
-            resize(key,value);
+            resize();
         }
 
         if(table[index]==null){
@@ -63,10 +62,28 @@ public class MyHashMapclosetoActual<K,V> {
             }
         }
         table[index].add(new Entry<>(key,value));
+        size++;
+    }
+
+    public  boolean containsKey(K key){
+
+        int index =Math.abs(key.hashCode())%table.length;
+
+        if(table[index]!=null){
+        for(Entry<K ,V> entry: table[index]){
+
+            if(entry.key.equals(key)) {
+
+                return true;
+            }
+            }
+        }
+        return false;
+
     }
 
     /*Wrong Resize Implementation*/
-    public void resize(K key, V v){
+    public void resize(){
             int newCapacity=capacity*2;
 
             LinkedList<Entry<K,V>>[] newtable= new LinkedList[newCapacity];
@@ -78,15 +95,16 @@ public class MyHashMapclosetoActual<K,V> {
 
             //Copy all enties
             for(LinkedList<Entry<K,V> >bucket: table){
+                if(bucket!=null) {
+                    for (Entry<K, V> entry : bucket) {
 
-               for(Entry<K,V> entry: bucket){
+                        int newIndex = Math.abs((entry.key.hashCode())) % newCapacity;
 
-                   int newIndex=(entry.key.hashCode())%newCapacity;
-
-                   newtable[newIndex].add(entry);
+                        newtable[newIndex].add(entry);
 
 
-               }
+                    }
+                }
             }
 
         table=newtable;
@@ -94,7 +112,7 @@ public class MyHashMapclosetoActual<K,V> {
     }
 
     public V get(K key){
-        int index =key.hashCode()%table.length;
+        int index =Math.abs(key.hashCode())%table.length;
         if(table[index]!=null){
             for(Entry<K,V> entry: table[index] ){
 
@@ -109,7 +127,7 @@ public class MyHashMapclosetoActual<K,V> {
 
     public void remove(K key){
 
-        int index = key.hashCode()%table.length;
+        int index = Math.abs(key.hashCode())%table.length;
 
         if(table[index]!=null){
 //            for(Entry<K,V> entry: table[index]){
